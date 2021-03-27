@@ -34,7 +34,7 @@ export const AddressForm = ({
 
   const addressTypes = ["Home", "Office"];
 
-  console.log({ editAdd });
+  // console.log(editAdd);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -95,76 +95,77 @@ export const AddressForm = ({
     setAddressType("Home");
   };
 
+  console.log({ editAdd });
   return (
     <div>
       <h2>Address Form</h2>
 
       <h3>{msg}</h3>
 
-      <form onSubmit={handleSubmit} className='address-form'>
-        <div className='flex-input'>
-          <div className='input'>
+      <form onSubmit={handleSubmit} className="address-form">
+        <div className="flex-input">
+          <div className="input">
             <input
-              type='text'
-              className='input-txt'
+              type="text"
+              className="input-txt"
               required
               onChange={(e) => setName(e.target.value)}
             />
-            <span className='flt-label'>Your Name</span>
+            <span className="flt-label">Your Name</span>
           </div>
 
-          <div className='input'>
+          <div className="input">
             <input
-              type='number'
-              className='input-txt'
+              type="number"
+              className="input-txt"
               required
               value={phoneNumber}
               onChange={(e) => setPhoneNumber(e.target.value)}
             />
-            <span className='flt-label'>Phone Number</span>
+            <span className="flt-label">Phone Number</span>
           </div>
         </div>
 
-        <div className='flex-input'>
-          <div className='input'>
+        <div className="flex-input">
+          <div className="input">
             <input
-              type='number'
-              className='input-txt'
+              type="number"
+              className="input-txt"
               required
               value={zipCode}
               onChange={(e) => setZipCode(e.target.value)}
             />
-            <span className='flt-label'>Zip Code</span>
+            <span className="flt-label">Zip Code</span>
           </div>
 
-          <div className='input'>
+          <div className="input">
             <input
-              type='text'
-              className='input-txt'
+              type="text"
+              className="input-txt"
               required
               value={city}
               onChange={(e) => setCity(e.target.value)}
             />
-            <span className='flt-label'>City</span>
+            <span className="flt-label">City</span>
           </div>
         </div>
 
-        <div className='flex-input'>
-          <div className='input'>
+        <div className="flex-input">
+          <div className="input">
             <textarea
-              className='input-txtarea'
-              cols='20'
-              rows='10'
+              className="input-txtarea"
+              cols="20"
+              rows="10"
               required
               value={address}
               onChange={(e) => setAddress(e.target.value)}
             ></textarea>
-            <span className='flt-label'>Address</span>
+            <span className="flt-label">Address</span>
           </div>
 
           <div>
             <select
-              className='input-select'
+              className="input-select"
               value={state}
               onChange={(e) => setState(e.target.value)}
             >
@@ -174,7 +175,7 @@ export const AddressForm = ({
             </select>
 
             <select
-              className='input-select'
+              className="input-select"
               value={country}
               onChange={(e) => setCountry(e.target.value)}
             >
@@ -183,14 +184,14 @@ export const AddressForm = ({
               })}
             </select>
 
-            <div className='radio'>
+            <div className="radio">
               <p>Select the Address Type:</p>
               {addressTypes.map((addType) => {
                 return (
-                  <label className='input-radio-label'>
+                  <label className="input-radio-label">
                     <input
-                      className='input-radio'
-                      type='radio'
+                      className="input-radio"
+                      type="radio"
                       value={addType}
                       checked={addressType === addType}
                       onChange={(e) => setAddressType(e.target.value)}
@@ -203,11 +204,11 @@ export const AddressForm = ({
           </div>
         </div>
 
-        <div className='flex-input center'>
-          <button className='btn primary' type='submit'>
+        <div className="flex-input center">
+          <button className="btn primary" type="submit">
             Add Address
           </button>
-          <button className='btn secondary' onClick={handleReset} type='reset'>
+          <button className="btn secondary" onClick={handleReset} type="reset">
             Discard
           </button>
         </div>

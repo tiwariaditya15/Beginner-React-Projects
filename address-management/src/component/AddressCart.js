@@ -1,3 +1,4 @@
+import { useState } from "react";
 import axios from "axios";
 import { AddressForm } from "./AddressForm";
 
@@ -6,19 +7,25 @@ export const AddressCart = ({
   setAddresses,
   setShowAddressForm,
 }) => {
-  const handleEdit = (address) => {
-    console.log({ address });
-    <AddressForm
-      // addresses={addresses}
-      // setAddresses={setAddresses}
-      // setShowAddressForm={setShowAddressForm}
-      // msg={msg}
-      // setMsg={setMsg}
-      editAdd={address}
-    />;
-    setShowAddressForm(true);
-  };
+  const [editAddress, setEditAddress] = useState({});
+  const [edit, setEdit] = useState(false);
+  // const handleEdit = (address) => {
+  //   console.log({ address });
+  //   <AddressForm
+  //     // addresses={addresses}
+  //     // setAddresses={setAddresses}
+  //     // setShowAddressForm={setShowAddressForm}
+  //     // msg={msg}
+  //     // setMsg={setMsg}
+  //     editAdd={address}
+  //   />;
+  //   setShowAddressForm(true);
+  // };
 
+  const handleEdit = (address) => {
+    setEdit(true);
+    setEditAddress(address);
+  };
   const handleDelete = async (id) => {
     const { status } = await axios.delete(`api/addresses/${id}`);
 
@@ -32,63 +39,75 @@ export const AddressCart = ({
   };
 
   return (
-    <div className='container'>
-      {addresses.map(
-        ({
-          id,
-          name,
-          phonenumber,
-          zipcode,
-          address,
-          city,
-          state,
-          country,
-          addresstype,
-        }) => {
-          return (
-            <div className='card' key={id}>
-              <div className='card-info'>
-                <h3>{name}</h3>
-                <div className='card-content'>
-                  <small>{phonenumber}</small>
-                  <small>{addresstype}</small>
-                  <small>{zipcode}</small>
-                </div>
-                <h4 className='card-info-para'>{address}</h4>
-                <div className='card-content'>
-                  <span className='card-info-para'>{city}</span>
-                  <span className='card-info-para'>{state}</span>
-                  <span className='card-info-para'>{country}</span>
-                </div>
-                <div className='card-content mg-1'>
-                  <button
-                    className='btn primary'
-                    onClick={() =>
-                      handleEdit({
-                        id,
-                        name,
-                        phonenumber,
-                        zipcode,
-                        address,
-                        city,
-                        state,
-                        country,
-                      })
-                    }
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className='btn secondary'
-                    onClick={() => handleDelete(id)}
-                  >
-                    Remove
-                  </button>
+    <div className="container">
+      {edit ? (
+        <AddressForm
+          // addresses={addresses}
+          // setAddresses={setAddresses}
+          // setShowAddressForm={setShowAddressForm}
+          // msg={msg}
+          // setMsg={setMsg}
+          editAdd={editAddress}
+        />
+      ) : (
+        addresses.map(
+          ({
+            id,
+            name,
+            phonenumber,
+            zipcode,
+            address,
+            city,
+            state,
+            country,
+            addresstype,
+          }) => {
+            return (
+              <div className="card" key={id}>
+                <div className="card-info">
+                  <h3>{name}</h3>
+                  <div className="card-content">
+                    <small>{phonenumber}</small>
+                    <small>{addresstype}</small>
+                    <small>{zipcode}</small>
+                  </div>
+                  <h4 className="card-info-para">{address}</h4>
+                  <div className="card-content">
+                    <span className="card-info-para">{city}</span>
+                    <span className="card-info-para">{state}</span>
+                    <span className="card-info-para">{country}</span>
+                  </div>
+                  <div className="card-content mg-1">
+                    <button
+                      className="btn primary"
+                      onClick={() => {
+                        handleEdit({
+                          id,
+                          name,
+                          phonenumber,
+                          zipcode,
+                          address,
+                          city,
+                          state,
+                          country,
+                          addresstype,
+                        });
+                      }}
+                    >
+                      Edit
+                    </button>
+                    <button
+                      className="btn secondary"
+                      onClick={() => handleDelete(id)}
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               </div>
-            </div>
-          );
-        }
+            );
+          }
+        )
       )}
     </div>
   );
